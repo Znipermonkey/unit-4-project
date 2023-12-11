@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Project Tracking App</title>
+</head>
+<body>
+
+    <div class="form-container">
+        <h3>Add Team</h3>
+        <form action="{{ url_for('add_team') }}" method="POST">
+            {{ team_form.csrf_token() }}
+            {{ team_form.team_name.label }}
+            {{ team_form.team_name }}
+            {{ team_form.submit.label }}
+            {{ team_form.submit }}
+        </form>
+    </div>
+
+    <div class="form-container">
+        <form action="{{ url_for('add_project') }}" method="POST">
+            {{ project_form.csrf_token() }}
+            {{ project_form.project_name.label }}
+            {{ project_form.project_name }}
+            {{ project_form.description.label }}
+            {{ project_form.description }}
+            {{ project_form.completed.label }}
+            {{ project_form.completed }}
+            {{ project_form.team_selection.label }}
+            {{ project_form.team_selection }}
+            {{ project_form.submit.label }}
+            {{ project_form.submit }}
+        </form>
+    </div>
+
+    <header>
+        <nav class="nav">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                <li class="nav-item">
+                {% if page == "teams" %}
+                    <a class="nav-link active" aria-current="page" href="#">
+                {% else %}
+                    <a class="nav-link" href="{{ url_for('teams') }}">
+                {% endif %}
+                  Teams</a>
+                </li>
+                <li class="nav-item">
+                {% if page == "projects" %}
+                    <a class="nav-link active" aria-current="page" href="#">
+                {% else %}
+                    <a class="nav-link" href="{{ url_for('projects') }}">
+                {% endif %}
+                    Projects</a>
+                </li>
+              </ul>
+            </nav>
+    </header>
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main> 
+</body>
+</html>
+ 
